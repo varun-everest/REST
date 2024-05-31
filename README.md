@@ -36,7 +36,7 @@ Users
 ```
 3. create user
 ```bash
-    curl -X POST -d '{"username": "vinay"}' -H 'Content-type: application/json ' 'http://localhost:3000/users'
+    curl -X POST -d '{"username":"vinay"}' 'http://localhost:3000/users/1'
 ```
 
 
@@ -74,3 +74,51 @@ provider will
 
 1. Create APIs for user subscribing to providers
 `user can choose any one provider`
+
+
+## Task 4:
+
+1. Create APIs for Meters
+Meter will have MeterId, Name, readings
+
+1. API to create meter
+
+```shell
+    curl -X GET 'http://localhost:3000/meters'
+```
+
+2. API to store meter readings
+
+```shell
+    curl -X POST -d '{"units": 5, "time":"2024-05-31T10:00:00.000Z"}' 'http://localhost:3000/meters/1/readings'
+```
+
+
+3. API to get all meter readings
+
+```shell
+    curl -X GET 'http://localhost:3000/meters/1/readings'
+```
+
+
+
+## Task 5
+1. A meter will be associated with user i.e., a meter belongs to a user
+
+2. Create an API to return all readings of given user id
+
+3. Create an API to return bill for given user id
+
+bill = total_units * provider_charge
+
+Ex:
+user A -> meter A
+user A -> Electro
+```
+readings = [
+    { "units":  5, "time": "2024-05-31T10:00:00.000Z" },
+    { "units":  7, "time": "2024-05-31T11:00:00.000Z" },
+    { "units":  1, "time": "2024-05-31T12:00:00.000Z" }
+]
+
+example response: {user_id: 1, amount: 65}
