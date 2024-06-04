@@ -250,8 +250,14 @@ app.get('/users/:userId/subscribe/:providerId/:meterId', (req, res) => {
 app.get('/users/:id/readings', (req, res) => {
     const findUser = users.find(ele => ele.id === parseInt(req.params.id));
     if(findUser) {
-        if( findUser.meterId !== null) {
-            return res.send(findUser.meterId.readings);
+        if( findUser.meterId) {
+            const m = meters.find(ele => ele.meterId === findUser.meterId)
+            if(m){
+                return res.send(m.readings);
+            }
+            else {
+                return res.send("No Readings are there");
+            }
         }
         else {
             return res.send("No meter is associated with given user");
